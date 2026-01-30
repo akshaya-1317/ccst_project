@@ -1,0 +1,21 @@
+package pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+
+public class Login {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		driver.findElement(By.xpath("//input[@value='Username']")).sendKeys("401");
+		
+//		driver.wait(3000);
+		Thread.sleep(Duration.ofSeconds(5));
+		driver.findElement(By.xpath("//input[@value='Password']")).clear();
+		driver.findElement(By.xpath("//input[@value='Password']")).sendKeys("OFSCHead#12345");
+		
+		driver.findElement(By.xpath("//input[@type='submit']")).click();
+	}
+
+}

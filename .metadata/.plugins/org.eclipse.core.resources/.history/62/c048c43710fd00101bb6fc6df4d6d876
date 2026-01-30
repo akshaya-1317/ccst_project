@@ -1,0 +1,23 @@
+package pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+
+import base.Baseclass;
+
+public class CenterHeadLogin extends Baseclass {
+
+	public static void main(String[] args) {
+		driver.findElement(By.xpath("//input[@value='Username']")).sendKeys("401");
+		
+//		driver.wait(3000);
+		Thread.sleep(Duration.ofSeconds(5));
+		driver.findElement(By.xpath("//input[@value='Password']")).clear();
+		driver.findElement(By.xpath("//input[@value='Password']")).sendKeys("OFSCHead#12345");
+		
+		driver.findElement(By.xpath("//input[@type='submit']")).click();
+
+	}
+
+}

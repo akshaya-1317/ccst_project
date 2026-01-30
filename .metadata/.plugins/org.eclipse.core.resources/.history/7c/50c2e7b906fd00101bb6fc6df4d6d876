@@ -1,0 +1,38 @@
+package base;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Baseclass {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+	//	WebDriver driver = new ChromeDriver();
+		WebDriver driver = new FirefoxDriver();
+		driver.get("https://test-ofs.pune.cdac.in/");
+		driver.manage().window().maximize();
+		
+//		driver.findElement(By.xpath("//button[contains(text(), 'Advanced')]")).click();
+		
+//		driver.findElement(By.xpath("//a[@id='proceed-link']")).click();
+		
+		driver.findElement(By.xpath("//input[@value='Username']")).sendKeys("401");
+		
+//		driver.wait(3000);
+		Thread.sleep(Duration.ofSeconds(5));
+		driver.findElement(By.xpath("//input[@value='Password']")).clear();
+		driver.findElement(By.xpath("//input[@value='Password']")).sendKeys("OFSCHead#12345");
+
+//		sendKeys("OFSCHead#12345");
+		
+
+		
+	}
+
+}
+
+
