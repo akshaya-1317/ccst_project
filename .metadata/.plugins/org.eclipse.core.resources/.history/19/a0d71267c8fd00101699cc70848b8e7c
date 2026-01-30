@@ -1,0 +1,20 @@
+package tests;
+
+import org.testng.annotations.Test;
+
+import base.Baseclass;
+import pages.CenterHeadLogin;
+
+public class LoginTestCases extends Baseclass {
+	
+	@Test
+	public void verifyValidLogin(String username, String password) {
+		CenterHeadLogin chl = new CenterHeadLogin(driver);
+		chl.login("401", "OFSCHead#12345");
+		System.out.println("Center head logged in successfully.");
+	}
+}
+
+
+
+

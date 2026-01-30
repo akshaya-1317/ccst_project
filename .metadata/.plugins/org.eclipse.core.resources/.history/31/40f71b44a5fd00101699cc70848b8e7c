@@ -1,0 +1,9 @@
+package tests;
+
+import org.testng.annotations.Test;
+
+@Test
+public class AddCourseCoordinator extends  {
+	AddCourseCoordinator acc = new AddCourseCoordinator(driver);
+	acc.manageCourseC().click();
+}

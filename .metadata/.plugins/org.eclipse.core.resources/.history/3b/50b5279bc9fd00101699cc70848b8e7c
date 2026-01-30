@@ -1,0 +1,39 @@
+package pages;
+
+//import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+
+
+public class CenterHeadLogin {
+	
+	WebDriver driver;
+	
+	
+	By username=By.xpath("//input[@name='loginId']");
+	By password=By.xpath("//input[@name='password']");
+	By login=By.xpath("//input[@id='signIn']");
+	
+	public CenterHeadLogin(WebDriver driver) {
+		this.driver=driver;
+	}
+	
+	
+	public void chlogin(String user, String pass) {
+		driver.findElement(username).sendKeys();
+		driver.findElement(password).clear();
+		driver.findElement(password).sendKeys();
+		
+		
+		driver.findElement(login).click();
+		
+		
+	}
+	
+	
+
+
+}

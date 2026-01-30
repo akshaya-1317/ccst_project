@@ -10,10 +10,9 @@ public class LoginTestCases extends Baseclass {
 	@Test
 	public void verifyValidLogin() {
 		CenterHeadLogin chl = new CenterHeadLogin(driver);
-		chl.enterUsername().sendKeys("401");
-		chl.enterPassword().clear();
-		chl.enterPassword().sendKeys("OFSCHead#12345");	
-		chl.loginButton().click();
+		chl.chlogin("401", "OFSCHead#12345");
+		
+		
 		System.out.println("Center head logged in successfully.");
 	}
 }

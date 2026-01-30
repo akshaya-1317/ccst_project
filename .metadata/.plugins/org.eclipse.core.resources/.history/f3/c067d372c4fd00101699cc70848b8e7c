@@ -1,0 +1,41 @@
+package base;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
+public class Baseclass {
+
+		public WebDriver driver;
+		
+		@BeforeMethod
+		public void openBrowser() {
+			
+		
+	//	WebDriver driver = new ChromeDriver();
+	//	WebDriver driver = new FirefoxDriver();
+		
+		driver = new FirefoxDriver();
+		driver.get("https://test-ofs.pune.cdac.in/");
+		driver.manage().window().maximize();
+
+//		@AfterMethod
+//		public void closeBrowser() {
+//			if(driver != null) {
+//				driver.quit();
+//			}
+//		}
+
+		
+
+		
+	}
+
+}
+
+

@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-01-29T19:02:33 IST" name="Default suite" finished-at="2026-01-29T19:03:22 IST" duration-ms="49677">
+  <suite started-at="2026-01-30T19:16:38 IST" name="Default suite" finished-at="2026-01-30T19:17:29 IST" duration-ms="50260">
     <groups>
     </groups>
-    <test started-at="2026-01-29T19:02:33 IST" name="Default test" finished-at="2026-01-29T19:03:22 IST" duration-ms="49677">
-      <class name="tests.LoginTestCases">
-        <test-method is-config="true" signature="openBrowser()[pri:0, instance:tests.LoginTestCases@4802796d]" started-at="2026-01-29T19:02:33 IST" name="openBrowser" finished-at="2026-01-29T19:03:22 IST" duration-ms="49143" status="PASS">
+    <test started-at="2026-01-30T19:16:38 IST" name="Default test" finished-at="2026-01-30T19:17:29 IST" duration-ms="50260">
+      <class name="tests.AssignCctest">
+        <test-method is-config="true" signature="openBrowser()[pri:0, instance:tests.AssignCctest@1bb5a082]" started-at="2026-01-30T19:16:38 IST" name="openBrowser" finished-at="2026-01-30T19:17:27 IST" duration-ms="49000" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method signature="verifyValidLogin()[pri:0, instance:tests.LoginTestCases@4802796d]" started-at="2026-01-29T19:03:22 IST" name="verifyValidLogin" finished-at="2026-01-29T19:03:22 IST" duration-ms="490" status="PASS">
+        <test-method signature="verifyAssignCoordinator()[pri:0, instance:tests.AssignCctest@1bb5a082]" started-at="2026-01-30T19:17:27 IST" name="verifyAssignCoordinator" finished-at="2026-01-30T19:17:29 IST" duration-ms="1215" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyValidLogin -->
-      </class> <!-- tests.LoginTestCases -->
+        </test-method> <!-- verifyAssignCoordinator -->
+      </class> <!-- tests.AssignCctest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

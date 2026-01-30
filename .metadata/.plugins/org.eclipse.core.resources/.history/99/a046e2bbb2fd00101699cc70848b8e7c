@@ -1,0 +1,27 @@
+package tests;
+
+import org.testng.annotations.Test;
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import pages.AddCourseCoordinator;
+
+
+public class AddCourseCtests extends Baseclass {
+	
+	@Test
+	public void verifyAddCoordinator() {
+		AddCourseCoordinator acc = new AddCourseCoordinator(driver);
+		acc.manageCourseC().click();
+		acc.addCourseC().click();
+		acc.addCcName().sendKeys("ABCD");
+		acc.addCcEmail().sendKeys("abc@gmail.com");
+		acc.addCcPhone().sendKeys("123456789");
+		acc.addCcMobile().sendKeys("987654321");
+	}
+	
+	
+	
+	
+	
+	
+}

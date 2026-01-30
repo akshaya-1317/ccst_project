@@ -1,0 +1,37 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class AddCourseCoordinator {
+	WebDriver driver;
+	
+	  public AddCourseCoordinator(WebDriver driver) {
+	        this.driver = driver;
+	    }
+	  
+	  By manageCC = By.xpath("//b[contains(text(), 'Manage Course Coordinator')]");
+	  By addCC = By.xpath("//font[contains(text(), 'Add Course Coordinator')]");
+	
+	  
+	  
+	  public WebElement manageCourseC() {
+	    	
+	    	return driver.findElement(manageCC);
+		}
+	  
+	  public WebElement addCourseC() {
+	    	
+	    	return driver.findElement(addCC);
+		}
+	  
+	  
+//	  public void addcoursec() {
+//		  driver.findElement(manageCC).click();
+//		  driver.findElement(addCC).click();
+//	  }
+//	  
+	  
+	  
+}

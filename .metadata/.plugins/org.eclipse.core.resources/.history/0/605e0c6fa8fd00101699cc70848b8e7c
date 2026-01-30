@@ -1,0 +1,23 @@
+package tests;
+
+import org.testng.annotations.Test;
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import pages.AddCourseCoordinator;
+
+
+public class AddCourseCtests extends AddCourseCoordinator {
+	
+	@Test
+	public void verifyAddCoordinator() {
+		AddCourseCoordinator acc = new AddCourseCoordinator(driver);
+		acc.manageCourseC().click();
+		acc.manageCourseC().click();
+	}
+	
+	
+	
+	
+	
+	
+}

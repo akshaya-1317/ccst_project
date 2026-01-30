@@ -1,0 +1,49 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class AssignCc {
+	WebDriver driver;
+	
+	By manageCC = By.xpath("//a[@class='drop'and @href='#']");
+	By assigncc = By.xpath("//a[@href='/feedbackSystem/login/faculty/call_assign_ccPage']");
+	
+	By courseTypeDropdown = By.id("courseTypeId");
+	By batchDropdown = By.id("batchAsCourseType");
+	By coordinatorDropdown = By.id("CC_id");
+	By assignButton = By.xpath("//input[@value='Assign']");
+	
+	By courseCheckboxes = By.xpath("//input[@type='checkbox' and @name='courseId']");
+	
+	public AssignCc(WebDriver driver) {
+        this.driver = driver;
+    }
+	
+	public void navigateToAssignCoordinator() {
+        driver.findElement(manageCC).click();
+        driver.findElement(assigncc).click();
+    }
+	
+	public void assignCoordinator(String courseType, String batch, String coordinator) {
+        new Select(driver.findElement(courseTypeDropdown)).selectByVisibleText(courseType);
+        new Select(driver.findElement(batchDropdown)).selectByVisibleText(batch);
+        new Select(driver.findElement(coordinatorDropdown)).selectByVisibleText(coordinator);
+        driver.findElement(assignButton).click();
+    }
+	
+	private By getCheckboxByText(String courseName) {
+	    return By.xpath("//td[contains(text(),'" + courseName + "')]/preceding-sibling::td/input[@type='checkbox']");
+	}
+	
+	public void selectCourseByName(String courseName) {
+	    driver.findElement(getCheckboxByText(courseName)).click();
+	}
+	
+//	public void selectMultipleCourses(String[] courseNames) {
+//	    for (String name : courseNames) {
+//	        selectCourseByName(name);
+//	    }
+	
+}

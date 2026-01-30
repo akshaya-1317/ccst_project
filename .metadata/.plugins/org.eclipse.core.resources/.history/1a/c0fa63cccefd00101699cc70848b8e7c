@@ -1,0 +1,35 @@
+package tests;
+
+import org.testng.annotations.Test;
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import pages.AddCourseCoordinator;
+
+
+public class AddCourseCtests extends Baseclass {
+	
+	@Test
+	public void verifyAddCoordinator() throws InterruptedException {
+		CenterHeadLogin chl = new CenterHeadLogin(driver);
+		chl.chlogin("401", "OFSCHead#12345");
+		
+
+		
+		AddCourseCoordinator acc = new AddCourseCoordinator(driver);
+		acc.navigateToAddCoordinator();
+		
+		driver.wait(5);
+		
+		acc.fillCoordinatorDetails("Abcd name", "abcd@gmail.com", "123456", "123456789");
+		System.out.println("filled details");
+		
+		
+
+	}
+	
+	
+	
+	
+	
+	
+}

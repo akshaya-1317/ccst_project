@@ -6,43 +6,33 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-//import base.Baseclass;
+
 
 public class CenterHeadLogin {
 	
 	WebDriver driver;
 	
-	//constructor
+	
+	By username=By.xpath("//input[@name='loginId']");
+	By password=By.xpath("//input[@name='password']");
+	By login=By.xpath("//input[@id='signIn']");
 	
 	public CenterHeadLogin(WebDriver driver) {
 		this.driver=driver;
 	}
 	
-
 	
-	By username=By.xpath("//input[@name='loginId']");
-	
-	By password=By.xpath("//input[@name='password']");
-	
-	By login=By.xpath("//input[@id='signIn']");
-	
-	
-	
-	public WebElement enterUsername() {
-    	
-    	return driver.findElement(username);
+	public void chlogin(String user, String pass) {
+		driver.findElement(username).sendKeys(user);
+		driver.findElement(password).clear();
+		driver.findElement(password).sendKeys(pass);
+		
+		
+		driver.findElement(login).click();
+		
+		
 	}
 	
-	 public WebElement enterPassword() {
-			
-		    return driver.findElement(password); //this returns the xpath for username
-	}
-	
-	  public WebElement loginButton() {
-			
-		  return driver.findElement(login);
-	  
-	}
 	
 
 
