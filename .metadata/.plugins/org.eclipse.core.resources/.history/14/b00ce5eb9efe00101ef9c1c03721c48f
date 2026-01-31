@@ -1,0 +1,23 @@
+package util;
+
+import com.opencsv.CSVReader;
+import java.io.FileReader;
+import java.util.List;
+
+public class CSVReaderUtil {
+    public static Object[][] readCSV(String filePath) {
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+            List<String[]> data = reader.readAll();
+            // Remove header row
+            data.remove(0);
+            Object[][] dataArray = new Object[data.size()][3];
+            for (int i = 0; i < data.size(); i++) {
+                dataArray[i] = data.get(i);
+            }
+            return dataArray;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}

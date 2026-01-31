@@ -1,0 +1,75 @@
+package tests;
+
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import util.CSVReaderUtil;
+
+public class LoginTestCases extends Baseclass {
+	
+	@DataProvider(name = "loginDataProvider")
+    public Object[][] getData() {
+        // Path to your CSV file
+        String path = System.getProperty("user.dir") + "/src/test/resources/loginData.csv";
+        return CSVReaderUtil.readCSV(path);
+    }
+
+    @Test(dataProvider = "loginDataProvider")
+    public void verifyLoginScenarios(String user, String pass, String scenario) {
+        CenterHeadLogin chl = new CenterHeadLogin(driver);
+        
+        // Execute login action
+        chl.chlogin(user, pass);
+
+        if (scenario.equals("valid")) {
+            // Assert success (Update locator/text based on actual dashboard title)
+            String expectedTitle = "Center Head Profile"; 
+            Assert.assertEquals(driver.getTitle(), expectedTitle, "Login failed for valid user!");
+            System.out.println("Valid login test passed.");
+        } else {
+            // Assert failure (e.g., URL stays same or error message is displayed)
+            boolean isLoginButtonPresent = driver.findElements(chl.login).size() > 0;
+            Assert.assertTrue(isLoginButtonPresent, "User logged in with invalid data: " + scenario);
+            System.out.println("Invalid login test passed for scenario: " + scenario);
+        }
+    }
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@Test
+//	public void verifyValidLogin() {
+//		CenterHeadLogin chl = new CenterHeadLogin(driver);
+//		chl.chlogin("401", "OFSCHead#12345");
+//		
+//		Assert.assertEquals("Center Head Profile", "Center Head Profile", "Not the Center head's dashboard");
+//		
+//		
+//		System.out.println("Center head logged in successfully.");
+//	}
+}
+
+
+
+

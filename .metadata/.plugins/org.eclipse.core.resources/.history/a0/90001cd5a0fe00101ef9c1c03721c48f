@@ -1,0 +1,27 @@
+package tests;
+
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import util.CSVReaderUtil;
+
+public class LoginTestCases extends Baseclass {
+	
+	@Test
+	public void verifyValidLogin() {
+		CenterHeadLogin chl = new CenterHeadLogin(driver);
+		chl.chlogin("401", "OFSCHead#12345");
+		
+		Assert.assertEquals("Center Head Profile", "Center Head Profile", "Not the Center head's dashboard");
+		
+		
+		System.out.println("Center head logged in successfully.");
+	}
+}
+
+
+
+

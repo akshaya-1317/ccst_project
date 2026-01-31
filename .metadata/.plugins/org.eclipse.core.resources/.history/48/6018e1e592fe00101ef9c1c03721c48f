@@ -1,0 +1,36 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.Baseclass;
+
+public class CenterwiseFeedbackDetails extends Baseclass{
+	WebDriver driver;
+	Baseclass base;
+	
+	By manageCC = By.xpath("//a[@class='drop'and @href='#']");
+	By centerwiseFD = By.xpath("//a[@href='/feedbackSystem/login/faculty/viewCenterCoursePlan']");
+	
+	By courseType = By.id("courseTypeId");
+    By course = By.id("courseId");
+    By batch = By.id("batch");
+    
+    public CenterwiseFeedbackDetails(WebDriver driver, Baseclass baseInstance) {
+        this.driver = driver;
+        this.base = baseInstance;
+    }
+    
+    public void navigateToCenterwiseFeedback() {
+        driver.findElement(manageCC).click();
+        driver.findElement(centerwiseFD).click();
+
+    }
+    
+    public void centerwiseFeedbackDetails(String type, String courseName, String batchName) {
+        base.selectFromDropdown(courseType, type);
+        base.selectFromDropdown(course, courseName);
+        base.selectFromDropdown(batch, batchName);
+    }
+    
+}

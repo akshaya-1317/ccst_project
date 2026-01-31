@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 //import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -38,6 +39,8 @@ public class Baseclass {
 	        dropdown.selectByVisibleText(visibleText);
 		}
 		
+		
+		//Alert for assign cc
 		public void acceptAlert() {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 	        wait.until(ExpectedConditions.alertIsPresent());
@@ -47,12 +50,12 @@ public class Baseclass {
 		}
 		
 
-//		@AfterMethod
-//		public void closeBrowser() {
-//			if(driver != null) {
-//				driver.quit();
-//			}
-//		}
+		@AfterMethod
+		public void closeBrowser() {
+			if(driver != null) {
+				driver.quit();
+			}
+		}
 
 		
 

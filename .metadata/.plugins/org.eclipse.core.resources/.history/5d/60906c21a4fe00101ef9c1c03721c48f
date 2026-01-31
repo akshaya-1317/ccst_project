@@ -1,0 +1,47 @@
+package tests;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import base.Baseclass;
+import pages.CenterHeadLogin;
+
+
+public class LoginTestCases extends Baseclass {
+	
+	@Test(priority=1)
+	public void verifyValidLogin() {
+		CenterHeadLogin chl = new CenterHeadLogin(driver);
+		chl.chlogin("401", "OFSCHead#12345");
+		
+		SoftAssert sa = new SoftAssert();
+		
+		String ExpectedText = "https://test-ofs.pune.cdac.in/feedbackSystem/login/";
+		String ActualText = driver.getCurrentUrl();
+		
+		sa.assertEquals(ActualText, ExpectedText);
+		
+		sa.assertAll();
+		
+		//Assert.assertEquals("Center Head Profile", "Center Head Profile", "Not the Center head's dashboard");
+		
+		
+		
+		
+		System.out.println("Center head logged in successfully.");
+	}
+	
+	
+//	@Test(priority=0)
+//	public void verifyInvalidLogin() {
+//		CenterHeadLogin chl = new CenterHeadLogin(driver);
+//		chl.chlogin("404", "OFSCHead");
+//
+//	}
+	
+}
+
+
+
+

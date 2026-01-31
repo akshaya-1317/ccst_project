@@ -1,0 +1,44 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.Baseclass;
+
+public class CourseWiseSSI extends Baseclass {
+	WebDriver driver;
+    Baseclass base;
+    
+   // By manageCC = By.xpath("//a[@class='drop'and @href='#']");
+	By coursewiseSSI = By.xpath("/feedbackSystem/login/manager/viewCenterCourseSSI");
+
+	By courseType = By.id("courseTypeId");
+	By course = By.id("courseId");
+	By batch = By.id("batchId");
+	By ssireport = By.id("feedbackTypeId");
+	
+	By printbutton = By.id("btnPrintId");
+	
+	public CourseWiseSSI(WebDriver driver, Baseclass baseInstance) {
+        this.driver = driver;
+        this.base = baseInstance;
+    }
+	
+	public void navigateToCourseWiseSSI() {
+      //  driver.findElement(manageCC).click();
+        driver.findElement(coursewiseSSI).click();
+    }
+	
+	public void showSSIReport(String ctype, String cname, String cbatch, String report) {
+		base.selectFromDropdown(courseType, ctype);
+		base.selectFromDropdown(course, cname);
+		base.selectFromDropdown(batch, cbatch);
+		base.selectFromDropdown(ssireport, report);
+		
+		driver.findElement(printbutton).click();
+	}
+	
+
+
+
+}

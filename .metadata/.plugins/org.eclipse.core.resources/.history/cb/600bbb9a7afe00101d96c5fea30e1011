@@ -1,0 +1,27 @@
+package tests;
+
+import org.testng.annotations.Test;
+
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import pages.ViewCoursePlan;
+
+public class ViewCoursePlanTest extends Baseclass {
+	
+	@Test
+	public void verifyCoursePlan() {
+		
+		CenterHeadLogin chl =  new CenterHeadLogin(driver);
+		chl.chlogin("401", "OFSCHead#12345");
+		
+		ViewCoursePlan cp = new ViewCoursePlan(driver);
+		cp.navigateToViewCoursePlan();
+		
+		cp.selectCoursePlan("Certificate Courses", "CCST Project Test Course", "January 2026", "DAC Theory-1");
+	
+		
+		System.out.println("Selected for ciew course plan");
+	}
+	
+	
+}

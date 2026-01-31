@@ -10,9 +10,11 @@ public class AssignCc extends Baseclass {
 	WebDriver driver;
 	Baseclass base;
 	
+	//go to assign cc
 	By manageCC = By.xpath("//a[@class='drop'and @href='#']");
 	By assigncc = By.xpath("//a[@href='/feedbackSystem/login/faculty/call_assign_ccPage']");
 	
+	//xpath in assign cc
 	By courseTypeDropdown = By.id("courseTypeId");
 	By batchDropdown = By.id("batchAsCourseType");
 	By coordinatorDropdown = By.id("CC_id");
@@ -22,22 +24,26 @@ public class AssignCc extends Baseclass {
 	
 	By checkbox = By.xpath("//*[text()=\"CCST Project Test Course 2\"]");
 	
-	
+	//constructor
 	public AssignCc(WebDriver driver, Baseclass baseInstance ) {
         this.driver = driver;
         this.base = baseInstance;
     }
 	
+	//navigate to assign cc
 	public void navigateToAssignCoordinator() {
         driver.findElement(manageCC).click();
         driver.findElement(assigncc).click();
     }
 	
+	//submit assign button
 	 public void submitAssignment() {
      	driver.findElement(assignButton).click();
          base.acceptAlert();
      }
 	
+	 
+	 //dropdowns handling 
 	public void fillAssignmentForm(String courseType, String batch, String coordinator, String courseName) {
        
         base.selectFromDropdown(courseTypeDropdown, courseType);

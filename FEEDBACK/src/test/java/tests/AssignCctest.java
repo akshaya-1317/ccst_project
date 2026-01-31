@@ -10,7 +10,7 @@ import pages.CenterHeadLogin;
 public class AssignCctest extends Baseclass {
 	
 	@Test
-	public void verifyAssignCoordinator() {
+	public void verifyAssignCoordinator() throws InterruptedException {
 		CenterHeadLogin chl =  new CenterHeadLogin(driver);
 		chl.chlogin("401", "OFSCHead#12345");
 		
@@ -24,6 +24,7 @@ public class AssignCctest extends Baseclass {
 	            "CCST Project Test Course 2"
 	        );
 		
+		Thread.sleep(10);
 		assignPage.submitAssignment();
 		
 		System.out.println("Course coordinator and courses aassigned successfully");

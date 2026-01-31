@@ -23,6 +23,13 @@ public class CenterHeadLogin {
 	
 	
 	public void chlogin(String user, String pass) {
+		String u = (user == null) ? "" : user;
+	    String p = (pass == null) ? "" : pass;
+	    
+	    
+		
+		
+		
 		driver.findElement(username).sendKeys(user);
 		driver.findElement(password).clear();
 		driver.findElement(password).sendKeys(pass);

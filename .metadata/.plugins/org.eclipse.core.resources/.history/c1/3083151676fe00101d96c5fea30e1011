@@ -1,0 +1,17 @@
+package tests;
+
+import base.Baseclass;
+import pages.ViewCoursePlan;
+
+public class ViewCoursePlanTest extends Baseclass {
+	
+	public void verifyCoursePlan() {
+		ViewCoursePlan cp = new ViewCoursePlan(driver);
+		cp.selectCoursePlan("Certificate Courses", "CCST Project Test Course", "January 2026", "DAC Theory-1");
+	
+		
+		System.out.println("Selected for ciew course plan");
+	}
+	
+	
+}
