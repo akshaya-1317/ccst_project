@@ -1,0 +1,83 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import base.Baseclass;
+import java.util.List;
+
+public class TheorySSI extends Baseclass {
+    WebDriver driver;
+    Baseclass base;
+
+    // Locators
+By coursewiseSSI = By.xpath("//a[@href='/feedbackSystem/login/manager/viewCenterCourseSSI']");
+	
+	By courseType = By.id("courseTypeId");
+	By course = By.id("courseId");
+	By batch = By.id("batchId");
+	By ssireport = By.id("feedbackTypeId");
+    // //table[@id='tg']
+
+    public TheorySSI(WebDriver driver, Baseclass baseInstance) {
+        this.driver = driver;
+        this.base = baseInstance;
+    }
+    
+    public void navigateToCourseWiseSSI() {
+        driver.findElement(coursewiseSSI).click();
+    }
+    
+    public void showSSIReport(String ctype, String cname, String cbatch, String report) {
+		base.selectFromDropdown(courseType, ctype);
+		base.selectFromDropdown(course, cname);
+		base.selectFromDropdown(batch, cbatch);
+		base.selectFromDropdown(ssireport, report);
+		
+		//driver.findElement(printbutton).click();
+	}
+    
+    
+    By table = By.xpath("//table[@id='tg']"); 
+    public void verifyTableCalculations() {
+    	
+    }
+    
+
+//    public void verifyTableCalculations() {
+//        List<WebElement> rows = driver.findElements(tableRows);
+//        
+//        // Loop through rows that contain module data (skipping headers/footers if necessary)
+//        for (WebElement row : rows) {
+//            List<WebElement> columns = row.findElements(By.tagName("td"));
+//            
+//            // Assuming: Col 2=Name, Col 3=Mid, Col 4=End, Col 5=Actual Average
+//            if (columns.size() >= 5) {
+//                String moduleName = columns.get(1).getText();
+//                System.out.println(moduleName);
+//                String midStr = columns.get(2).getText();
+//                String endStr = columns.get(3).getText();
+//                String actualAvgStr = columns.get(4).getText();
+//
+//                if (!midStr.equals("NA") && !endStr.equals("NA")) {
+//                    double mid = Double.parseDouble(midStr);
+//                    double end = Double.parseDouble(endStr);
+//                    double actualAvg = Double.parseDouble(actualAvgStr);
+//
+//                    // Applying your formula: (Mid + End) / 2.0
+//                    double expectedAvg = (mid + end) / 2.0;
+//
+//                    if (Math.abs(expectedAvg - actualAvg) < 0.01) {
+//                        System.out.println("PASS: " + moduleName + " | Calc: " + expectedAvg + " | Web: " + actualAvg);
+//                    } else {
+//                        System.out.println("FAIL: " + moduleName + " | Expected: " + expectedAvg + " | Web: " + actualAvg);
+//                    }
+//                    
+//                    // Logic for SSI calculation as per your request
+//                    double theorySSI = expectedAvg * 60 / 100;
+//                    System.out.println("Calculated Theory SSI for " + moduleName + " is: " + theorySSI);
+//                }
+//            }
+//        }
+//    }
+}

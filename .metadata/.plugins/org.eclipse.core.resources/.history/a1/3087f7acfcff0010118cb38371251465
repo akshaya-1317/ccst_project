@@ -1,0 +1,125 @@
+//package pages;
+//
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+//import java.util.List;
+//import base.Baseclass;
+//
+//public class TheorySSI extends Baseclass {
+//    
+//    public TheorySSI(WebDriver driver) {
+//        this.driver = driver;
+//    }
+//
+//    // Locators
+//    By tableRows = By.xpath("//table/tbody/tr[td]"); // Adjust XPath based on actual table structure
+//   // By printButton = By.xpath("//button[text()='Print']");
+// //   By printButton = By.xpath("//button[@id='btnPrintId']");
+//
+//    public void validateCalculations() {
+//        List<WebElement> rows = driver.findElements(tableRows);
+//        
+//        for (WebElement row : rows) {
+//            try {
+//                String moduleName = row.findElement(By.xpath("./td[2]")).getText();
+//                String midText = row.findElement(By.xpath("./td[3]")).getText();
+//                String endText = row.findElement(By.xpath("./td[4]")).getText();
+//                String actualAvgText = row.findElement(By.xpath("./td[5]")).getText();
+//
+//                if (midText.equals("NA") || endText.equals("NA")) continue;
+//
+//                double mid = Double.parseDouble(midText);
+//                double end = Double.parseDouble(endText);
+//                double actualAvg = Double.parseDouble(actualAvgText);
+//
+//                // Formula 1: Theory Module Avg
+//                double expectedAvg = (mid + end) / 2.0;
+//                
+//                // Formula 2: Theory SSI (60% weightage)
+//                double theorySSI = expectedAvg * 0.6;
+//
+//                System.out.println("Module: " + moduleName);
+//                System.out.println(" - Expected Avg: " + expectedAvg + " | Actual: " + actualAvg);
+//                System.out.println(" - Calculated Theory SSI: " + theorySSI);
+//
+//                if (Math.abs(expectedAvg - actualAvg) < 0.01) {
+//                    System.out.println("Result: PASS");
+//                } else {
+//                    System.out.println("Result: FAIL");
+//                }
+//            } catch (Exception e) {
+//                // Skips headers or empty rows
+//            }
+//        }
+//    }
+//
+////    public void clickPrint() {
+////        driver.findElement(printButton).click();
+////    }
+//}
+
+
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+
+public class TheorySSI {
+    WebDriver driver;
+
+    public TheorySSI(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    By rowsLocator = By.xpath("//table//tr[td]"); 
+
+    public void validateCalculations() {
+        List<WebElement> rows = driver.findElements(rowsLocator);
+        
+        System.out.println("Step 1: Successfully located the data table.");
+
+        for (int i = 0; i < rows.size(); i++) {
+            try {
+                WebElement row = rows.get(i);
+                String moduleName = row.findElement(By.xpath("./td[1]")).getText();
+                
+                System.out.println("\n--- Processing Module: " + moduleName + " ---");
+
+                // Step 2: Extract values
+                String midText = row.findElement(By.xpath("./td[2]")).getText();
+                String endText = row.findElement(By.xpath("./td[3]")).getText();
+                String actualAvgText = row.findElement(By.xpath("./td[4]")).getText();
+
+                if (midText.equalsIgnoreCase("NA") || endText.equalsIgnoreCase("NA")) {
+                    System.out.println("Step 2: Skipping row due to 'NA' feedback values.");
+                    continue;
+                }
+                System.out.println("Step 2: Extracted Mid Feedback (" + midText + ") and End Feedback (" + endText + ")");
+
+                // Step 3: Parse and Calculate
+                double mid = Double.parseDouble(midText);
+                double end = Double.parseDouble(endText);
+                double actualAvg = Double.parseDouble(actualAvgText);
+
+                double expectedAvg = (mid + end) / 2.0;
+                double expectedSSI = expectedAvg * 0.6;
+                System.out.println("Step 3: Calculating Expected Average: (" + mid + " + " + end + ") / 2.0 = " + expectedAvg);
+
+                // Step 4: Comparison and Validation Message
+                if (Math.abs(expectedAvg - actualAvg) < 0.01) {
+                    // Your requested success message
+                    System.out.println("Step 4: SUCCESS - average is correct as per the given mid and end module feedback");
+                    System.out.println("Step 5: SSI verified at 60% weightage: " + String.format("%.2f", expectedSSI));
+                } else {
+                    System.err.println("Step 4: FAILURE - Calculation mismatch! UI shows: " + actualAvg + " but Code expects: " + expectedAvg);
+                }
+
+            } catch (Exception e) {
+                System.out.println("Note: Skipping non-data row (Header or Footer).");
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.testng.eclipse.launchconfig">
     <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <mapAttribute key="org.eclipse.debug.core.environmentVariables"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
@@ -8,9 +9,7 @@
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.testng.remote.RemoteTestNG"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="FEEDBACK"/>
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-    <mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS">
-        <mapEntry key="tests.AddCourseCtests" value=""/>
-    </mapAttribute>
+    <mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS"/>
     <listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
         <listEntry value="tests.AddCourseCtests"/>
     </listAttribute>

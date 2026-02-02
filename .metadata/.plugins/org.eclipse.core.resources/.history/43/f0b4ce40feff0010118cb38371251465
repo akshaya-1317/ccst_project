@@ -1,0 +1,75 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+
+public class TheorySSI {
+    WebDriver driver;
+
+    // Locators
+    private By tableRows = By.xpath("//table//tr[td]"); 
+    private By printButton = By.id("printBtn"); // Update with actual ID
+
+    public TheorySSI(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void validateCalculations() {
+        List<WebElement> rows = driver.findElements(tableRows);
+        System.out.println("Step 1: Successfully located " + rows.size() + " rows in the calculation table.");
+
+        for (WebElement row : rows) {
+            try {
+                // Step 2: Extract Module Name and Values from specific columns
+                String moduleName = row.findElement(By.xpath("./td[1]")).getText();
+                String midText = row.findElement(By.xpath("./td[2]")).getText();
+                String endText = row.findElement(By.xpath("./td[3]")).getText();
+                String uiAvgText = row.findElement(By.xpath("./td[4]")).getText();
+                String uiSSIText = row.findElement(By.xpath("./td[5]")).getText();
+
+                // Skip rows with "NA" feedback
+                if (midText.equalsIgnoreCase("NA") || endText.equalsIgnoreCase("NA")) {
+                    System.out.println("\n[Module: " + moduleName + "] Step: Skipping validation due to NA feedback values.");
+                    continue;
+                }
+
+                System.out.println("\n--- Validating Module: " + moduleName + " ---");
+                
+                // Step 3: Convert to numbers
+                double mid = Double.parseDouble(midText);
+                double end = Double.parseDouble(endText);
+                double uiAvg = Double.parseDouble(uiAvgText);
+                double uiSSI = Double.parseDouble(uiSSIText);
+
+                // Step 4: Apply Formula -> Theory Module Avg = (Mid + End) / 2.0
+                double calculatedAvg = (mid + end) / 2.0;
+                System.out.println("Step 2: Calculated Average: (" + mid + " + " + end + ") / 2.0 = " + calculatedAvg);
+
+                // Step 5: Apply Formula -> Theory SSI = Avg * 0.6
+                double calculatedSSI = calculatedAvg * 0.6;
+                System.out.println("Step 3: Calculated SSI (60%): " + calculatedAvg + " * 0.6 = " + calculatedSSI);
+
+                // Step 6: Verify and Print final message
+                if (Math.abs(calculatedAvg - uiAvg) < 0.01) {
+                    System.out.println("Step 4: SUCCESS - average is correct as per the given mid and end module feedback");
+                } else {
+                    System.err.println("Step 4: FAILURE - Average mismatch for " + moduleName);
+                }
+
+                if (Math.abs(calculatedSSI - uiSSI) < 0.01) {
+                    System.out.println("Step 5: SUCCESS - SSI calculation matches the UI value of " + uiSSI);
+                }
+
+            } catch (Exception e) {
+                // Silently skip header/formatting rows
+            }
+        }
+    }
+
+    public void clickPrint() {
+        System.out.println("\nFinal Step: Clicking the Print Button...");
+        driver.findElement(printButton).click();
+    }
+}

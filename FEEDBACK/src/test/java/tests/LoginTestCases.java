@@ -1,9 +1,9 @@
 package tests;
 
-import org.testng.Assert;
+//import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
+//import org.testng.asserts.SoftAssert;
 
 import base.Baseclass;
 import pages.CenterHeadLogin;
@@ -28,7 +28,6 @@ public class LoginTestCases extends Baseclass {
 
        
         
-        String ActualText = driver.getCurrentUrl();
 
       
         

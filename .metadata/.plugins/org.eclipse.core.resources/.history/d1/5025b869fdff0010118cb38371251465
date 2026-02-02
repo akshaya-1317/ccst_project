@@ -1,0 +1,45 @@
+
+
+package tests;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import pages.TheorySSI;
+import java.time.Duration;
+
+public class TheorySSITest {
+    WebDriver driver;
+    TheorySSIPage ssiPage;
+
+    @BeforeMethod
+    public void setup() {
+        // Setup Chrome Driver (Ensure you have WebDriverManager or correct path)
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        
+        // Navigate to the portal
+        driver.get("https://your-portal-url.com"); 
+    }
+
+    @Test
+    public void verifyTheoryModuleCalculations() {
+        ssiPage = new TheorySSIPage(driver);
+
+        // Execute step-by-step validation logic
+        ssiPage.validateCalculations();
+
+        // Print using the button as requested
+        ssiPage.clickPrint();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}

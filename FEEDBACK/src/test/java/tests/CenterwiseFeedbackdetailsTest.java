@@ -19,7 +19,7 @@ public class CenterwiseFeedbackdetailsTest extends Baseclass {
 	cfd.navigateToCenterwiseFeedback();
 	
 	cfd.centerwiseFeedbackDetails("Certificate Courses", "CCST Project Test Course 1", "January 2026");
-	System.out.println("Centerwise feedback details selected successfullty.");
+	System.out.println("Centerwise feedback details selected successfully.");
 	
 	}
 }

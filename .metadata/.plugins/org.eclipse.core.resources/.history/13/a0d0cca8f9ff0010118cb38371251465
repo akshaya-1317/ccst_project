@@ -1,0 +1,61 @@
+package tests;
+
+import org.testng.annotations.Test;
+import org.testng.Assert;
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import pages.CourseWiseSSI;
+import pages.TheorySSIPage;
+import java.util.List;
+import java.util.Map;
+
+public class TheorySSITest extends Baseclass {
+
+    @Test
+    public void verifyAndPrintTheorySSIReport() {
+        // 1. Login and Navigation
+        CenterHeadLogin chl = new CenterHeadLogin(driver);
+        chl.chlogin("401", "OFSCHead#12345");
+
+        CourseWiseSSI cws = new CourseWiseSSI(driver, this);
+        cws.navigateToCourseWiseSSI();
+        cws.showSSIReport("Certificate Courses", "CCST Project Test Course 1", "January 2026", "Theory");
+
+        // 2. Data Extraction
+        TheorySSIPage theoryPage = new TheorySSIPage(driver, this);
+        List<Map<String, String>> tableData = theoryPage.getSSIReportData();
+
+        System.out.println("--- SSI Report Calculation Verification ---");
+
+        for (Map<String, String> row : tableData) {
+            String module = row.get("moduleName");
+            String midStr = row.get("midAvg");
+            String endStr = row.get("endAvg");
+            String displayedAvgStr = row.get("displayedAvg");
+
+            // Handle "NA" values as shown in your screenshot
+            if (midStr.equalsIgnoreCase("NA") || endStr.equalsIgnoreCase("NA")) {
+                System.out.println("Module: " + module + " | Status: Skipped (NA values)");
+                continue;
+            }
+
+            double midAvg = Double.parseDouble(midStr);
+            double endAvg = Double.parseDouble(endStr);
+            double actualAvg = Double.parseDouble(displayedAvgStr);
+
+            // Calculation Formula: Theory Module Avg = (Mid + End) / 2.0
+            double expectedAvg = (midAvg + endAvg) / 2.0;
+
+            System.out.println("Module: " + module);
+            System.out.println("  Calculation: (" + midAvg + " + " + endAvg + ") / 2.0 = " + expectedAvg);
+            System.out.println("  Web Display: " + actualAvg);
+
+            // Assert equality with a small delta for rounding
+            Assert.assertEquals(actualAvg, expectedAvg, 0.01, "Mismatch in " + module);
+        }
+
+        // 3. Final Action: Click Print
+        theoryPage.clickPrint();
+        System.out.println("Report verified and print triggered successfully.");
+    }
+}

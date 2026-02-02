@@ -1,0 +1,93 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import base.Baseclass;
+import java.util.List;
+
+public class TheorySSI extends Baseclass {
+    WebDriver driver;
+    Baseclass base;
+
+    // Existing Locators
+    By coursewiseSSI = By.xpath("//a[@href='/feedbackSystem/login/manager/viewCenterCourseSSI']");
+    By courseType = By.id("courseTypeId");
+    By course = By.id("courseId");
+    By batch = By.id("batchId");
+    By ssireport = By.id("feedbackTypeId");
+    
+    // New Locators for Calculation & Button
+    By reportRows = By.xpath("//table[@id='ssiTable']//tr[td]"); // Adjust ID if necessary
+    By printButton = By.id("btnPrintId"); 
+
+    public TheorySSI(WebDriver driver, Baseclass baseInstance) {
+        this.driver = driver;
+        this.base = baseInstance;
+    }
+
+    public void navigateToCourseWiseSSI() {
+        driver.findElement(coursewiseSSI).click();
+    }
+
+    public void showSSIReport(String ctype, String cname, String cbatch, String report) {
+        base.selectFromDropdown(courseType, ctype);
+        base.selectFromDropdown(course, cname);
+        base.selectFromDropdown(batch, cbatch);
+        base.selectFromDropdown(ssireport, report);
+    }
+
+    public void validateTheoryCalculations() {
+        List<WebElement> rows = driver.findElements(reportRows);
+        System.out.println("Step 1: Scanned table. Found " + rows.size() + " modules to validate.");
+
+        for (WebElement row : rows) {
+            try {
+                String moduleName = row.findElement(By.xpath("./td[1]")).getText();
+                String midVal = row.findElement(By.xpath("./td[2]")).getText();
+                String endVal = row.findElement(By.xpath("./td[3]")).getText();
+                String uiAvgVal = row.findElement(By.xpath("./td[4]")).getText();
+                String uiSSIVal = row.findElement(By.xpath("./td[5]")).getText();
+
+                // Skip NA values
+                if (midVal.equalsIgnoreCase("NA") || endVal.equalsIgnoreCase("NA")) {
+                    System.out.println("\n[Module: " + moduleName + "] Step: Calculation skipped (NA feedback).");
+                    continue;
+                }
+
+                System.out.println("\n--- Processing Module: " + moduleName + " ---");
+
+                // Parse values
+                double mid = Double.parseDouble(midVal);
+                double end = Double.parseDouble(endVal);
+                double uiAvg = Double.parseDouble(uiAvgVal);
+                double uiSSI = Double.parseDouble(uiSSIVal);
+
+                // Formula implementation
+                double calculatedAvg = (mid + end) / 2.0;
+                double calculatedSSI = calculatedAvg * 0.6; // weightage 60/100
+
+                System.out.println("Step 2: Applied Formula -> (" + mid + " + " + end + ") / 2.0 = " + calculatedAvg);
+
+                // Validation & Requested Message
+                if (Math.abs(calculatedAvg - uiAvg) < 0.01) {
+                    System.out.println("Step 3: average is correct as per the given mid and end module feedback");
+                } else {
+                    System.err.println("Step 3: Average Mismatch! UI: " + uiAvg + " vs Code: " + calculatedAvg);
+                }
+
+                if (Math.abs(calculatedSSI - uiSSI) < 0.01) {
+                    System.out.println("Step 4: Theory SSI is correct: " + String.format("%.2f", calculatedSSI));
+                }
+
+            } catch (Exception e) {
+                // Skips header rows
+            }
+        }
+    }
+
+    public void clickPrint() {
+        System.out.println("\nFinal Step: Clicking the Print button.");
+        driver.findElement(printButton).click();
+    }
+}

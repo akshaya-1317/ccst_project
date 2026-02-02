@@ -20,6 +20,10 @@ public class CourseWiseSSItest extends Baseclass {
         
         cws.showSSIReport("Certificate Courses", "CCST Project Test Course 1", "January 2026", "Theory");
         
+        
+        
+        cws.showSSIReport("Certificate Courses", "CCST Project Test Course 1", "January 2026", "Lab");
+        
         System.out.println("SSI report successful");
         
         

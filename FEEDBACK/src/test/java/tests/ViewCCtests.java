@@ -15,5 +15,6 @@ public class ViewCCtests extends Baseclass {
 		
 		ViewCourseCoordinator vcc = new ViewCourseCoordinator(driver);
 		vcc.viewCCoordinator();
+		System.out.println("View course coordinator functioned viewed cc");
 	}
 }

@@ -1,0 +1,46 @@
+
+package tests;
+
+import org.testng.annotations.Test;
+import org.testng.Assert;
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import pages.CourseWiseSSI;
+import pages.TheorySSIPage;
+import java.util.List;
+import java.util.Map;
+
+public class TheorySSITest extends Baseclass {
+
+    @Test
+    public void verifyTheoryAverageCalculation() {
+        // 1. Login
+        CenterHeadLogin chl = new CenterHeadLogin(driver);
+        chl.chlogin("401", "OFSCHead#12345");
+
+        // 2. Navigate and Search
+        CourseWiseSSI cws = new CourseWiseSSI(driver, this);
+        cws.navigateToCourseWiseSSI();
+        cws.showSSIReport("Certificate Courses", "CCST Project Test Course 1", "January 2026", "Theory");
+
+        // 3. Verify Calculations using TheorySSIPage
+        TheorySSIPage theoryPage = new TheorySSIPage(driver);
+        List<Map<String, String>> data = theoryPage.getTheoryTableData();
+
+        for (Map<String, String> row : data) {
+            String module = row.get("moduleName");
+            double expected = theoryPage.calculateExpectedAverage(row.get("midAvg"), row.get("endAvg"));
+            
+            if (expected != -1.0) {
+                double actual = Double.parseDouble(row.get("displayedAvg"));
+                
+                System.out.println("Validating " + module + ": Expected [" + expected + "] Actual [" + actual + "]");
+                
+                // Assert with a delta of 0.01 to handle minor rounding differences
+                Assert.assertEquals(actual, expected, 0.01, "Average calculation error in module: " + module);
+            } else {
+                System.out.println("Skipped " + module + " due to NA values.");
+            }
+        }
+    }
+}

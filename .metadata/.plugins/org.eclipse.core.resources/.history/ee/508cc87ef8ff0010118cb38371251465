@@ -1,0 +1,52 @@
+package pages;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import base.Baseclass;
+
+public class TheorySSIPage {
+    WebDriver driver;
+   // Baseclass base;
+    WebDriverWait wait;
+
+    // Locators for table and data cells
+    By tableRows = By.xpath("//table//tr[td]"); 
+    By printButton = By.id("btnPrintId");
+
+    public TheorySSIPage(WebDriver driver, Baseclass baseInstance) {
+        this.driver = driver;
+      //  this.base = baseInstance;
+        
+    }
+
+    /**
+     * Scrapes the SSI report table and stores data in a list of maps.
+     */
+    public List<Map<String, String>> getSSIReportData() {
+        List<Map<String, String>> reportData = new ArrayList<>();
+        List<WebElement> rows = driver.findElements(tableRows);
+
+        for (WebElement row : rows) {
+            List<WebElement> cols = row.findElements(By.tagName("td"));
+            // Skip header rows or footer "Average Feedback Rating" rows
+            if (cols.size() >= 5 && !cols.get(1).getText().contains("Average Feedback Rating")) {
+                Map<String, String> data = new HashMap<>();
+                data.put("moduleName", cols.get(1).getText());
+                data.put("midAvg", cols.get(2).getText());
+                data.put("endAvg", cols.get(3).getText());
+                data.put("displayedAvg", cols.get(4).getText());
+                reportData.add(data);
+            }
+        }
+        return reportData;
+    }
+
+    public void clickPrint() {
+        driver.findElement(printButton).click();
+    }
+}

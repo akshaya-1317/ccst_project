@@ -9,7 +9,7 @@ import pages.ViewCoursePlan;
 public class ViewCoursePlanTest extends Baseclass {
 	
 	@Test
-	public void verifyCoursePlan() {
+	public void verifyCoursePlan() throws InterruptedException {
 		
 		CenterHeadLogin chl =  new CenterHeadLogin(driver);
 		chl.chlogin("401", "OFSCHead#12345");

@@ -1,0 +1,60 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+import base.Baseclass;
+
+public class TheorySSI extends Baseclass {
+    
+    public TheorySSI(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    // Locators
+    By tableRows = By.xpath("//table/tbody/tr[td]"); // Adjust XPath based on actual table structure
+   // By printButton = By.xpath("//button[text()='Print']");
+ //   By printButton = By.xpath("//button[@id='btnPrintId']");
+
+    public void validateCalculations() {
+        List<WebElement> rows = driver.findElements(tableRows);
+        
+        for (WebElement row : rows) {
+            try {
+                String moduleName = row.findElement(By.xpath("./td[2]")).getText();
+                String midText = row.findElement(By.xpath("./td[3]")).getText();
+                String endText = row.findElement(By.xpath("./td[4]")).getText();
+                String actualAvgText = row.findElement(By.xpath("./td[5]")).getText();
+
+                if (midText.equals("NA") || endText.equals("NA")) continue;
+
+                double mid = Double.parseDouble(midText);
+                double end = Double.parseDouble(endText);
+                double actualAvg = Double.parseDouble(actualAvgText);
+
+                // Formula 1: Theory Module Avg
+                double expectedAvg = (mid + end) / 2.0;
+                
+                // Formula 2: Theory SSI (60% weightage)
+                double theorySSI = expectedAvg * 0.7;
+
+                System.out.println("Module: " + moduleName);
+                System.out.println(" - Expected Avg: " + expectedAvg + " | Actual: " + actualAvg);
+                System.out.println(" - Calculated Theory SSI: " + theorySSI);
+
+                if (Math.abs(expectedAvg - actualAvg) < 0.01) {
+                    System.out.println("Result: PASS");
+                } else {
+                    System.out.println("Result: FAIL");
+                }
+            } catch (Exception e) {
+                // Skips headers or empty rows
+            }
+        }
+    }
+
+//    public void clickPrint() {
+//        driver.findElement(printButton).click();
+//    }
+}

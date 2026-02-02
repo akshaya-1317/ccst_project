@@ -1,0 +1,23 @@
+package tests;
+
+import org.testng.annotations.Test;
+import base.Baseclass;
+import pages.TheorySSI;
+
+public class TheorySSItest extends Baseclass {
+
+    @Test
+    public void testSSICalculations() {
+        TheorySSI ssiPage = new TheorySSI(driver);
+        
+        // Navigation logic (Assume login is handled or session is active)
+        System.out.println("Starting SSI Calculation Validation...");
+        
+        // Validate the data in the table
+        ssiPage.validateCalculations();
+        
+        // Click the print button as requested
+        ssiPage.clickPrint();
+        System.out.println("Print button clicked successfully.");
+    }
+}

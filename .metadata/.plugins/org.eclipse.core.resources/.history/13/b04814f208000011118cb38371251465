@@ -1,0 +1,29 @@
+package tests;
+
+import org.testng.annotations.Test;
+import base.Baseclass;
+import pages.CourseWiseSSI;
+import pages.TheorySSI;
+
+public class theorySSICalculationTest extends Baseclass {
+
+    @Test
+    public void verifySSIReportData() {
+        // Initialize the page with the driver and base instance
+        TheorySSI ssiPage = new TheorySSI(driver, this);
+
+        // 1. Navigation
+        ssiPage.navigateToCourseWiseSSI();
+        System.out.println("Navigated to Course Wise SSI Page.");
+
+        // 2. Filter Report
+        // Replace strings with your actual test data
+        ssiPage.showSSIReport("Post Graduate", "DAC", "Batch 1", "Theory SSI");
+        
+        // 3. Calculation Validation (The logic you requested)
+        ssiPage.validateTheoryCalculations();
+
+        // 4. Print action
+        ssiPage.clickPrint();
+    }
+}

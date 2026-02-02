@@ -1,0 +1,130 @@
+//package pages;
+//
+//import org.openqa.selenium.By;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+//import java.util.List;
+//import base.Baseclass;
+//
+//public class TheorySSI extends Baseclass {
+//    
+//    public TheorySSI(WebDriver driver) {
+//        this.driver = driver;
+//    }
+//
+//    // Locators
+//    By tableRows = By.xpath("//table/tbody/tr[td]"); // Adjust XPath based on actual table structure
+//   // By printButton = By.xpath("//button[text()='Print']");
+// //   By printButton = By.xpath("//button[@id='btnPrintId']");
+//
+//    public void validateCalculations() {
+//        List<WebElement> rows = driver.findElements(tableRows);
+//        
+//        for (WebElement row : rows) {
+//            try {
+//                String moduleName = row.findElement(By.xpath("./td[2]")).getText();
+//                String midText = row.findElement(By.xpath("./td[3]")).getText();
+//                String endText = row.findElement(By.xpath("./td[4]")).getText();
+//                String actualAvgText = row.findElement(By.xpath("./td[5]")).getText();
+//
+//                if (midText.equals("NA") || endText.equals("NA")) continue;
+//
+//                double mid = Double.parseDouble(midText);
+//                double end = Double.parseDouble(endText);
+//                double actualAvg = Double.parseDouble(actualAvgText);
+//
+//                // Formula 1: Theory Module Avg
+//                double expectedAvg = (mid + end) / 2.0;
+//                
+//                // Formula 2: Theory SSI (60% weightage)
+//                double theorySSI = expectedAvg * 0.6;
+//
+//                System.out.println("Module: " + moduleName);
+//                System.out.println(" - Expected Avg: " + expectedAvg + " | Actual: " + actualAvg);
+//                System.out.println(" - Calculated Theory SSI: " + theorySSI);
+//
+//                if (Math.abs(expectedAvg - actualAvg) < 0.01) {
+//                    System.out.println("Result: PASS");
+//                } else {
+//                    System.out.println("Result: FAIL");
+//                }
+//            } catch (Exception e) {
+//                // Skips headers or empty rows
+//            }
+//        }
+//    }
+//
+////    public void clickPrint() {
+////        driver.findElement(printButton).click();
+////    }
+//}
+
+
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.List;
+
+public class TheorySSI {
+    WebDriver driver;
+
+    public TheorySSI(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    // Locators based on your images
+    By rowsLocator = By.xpath("//table//tr[td]"); 
+    By printButton = By.id("printBtn"); // Replace with actual ID/XPath of your print button
+
+    public void validateCalculations() {
+        List<WebElement> rows = driver.findElements(rowsLocator);
+        
+        System.out.println("--- Starting Theory SSI Validation ---");
+
+        for (WebElement row : rows) {
+            try {
+                // Mapping columns based on typical academic tables
+                String moduleName = row.findElement(By.xpath("./td[1]")).getText();
+                String midText = row.findElement(By.xpath("./td[2]")).getText();
+                String endText = row.findElement(By.xpath("./td[3]")).getText();
+                String actualAvgText = row.findElement(By.xpath("./td[4]")).getText();
+
+                // Skip rows with "NA" or empty values
+                if (midText.equalsIgnoreCase("NA") || endText.equalsIgnoreCase("NA") || midText.isEmpty()) {
+                    continue;
+                }
+
+                double mid = Double.parseDouble(midText);
+                double end = Double.parseDouble(endText);
+                double actualAvg = Double.parseDouble(actualAvgText);
+
+                // Formula 1: Theory Module Avg = (Mid + End) / 2
+                double expectedAvg = (mid + end) / 2.0;
+                
+                // Formula 2: Theory SSI = Module Avg * 60%
+                double expectedSSI = expectedAvg * 0.6;
+
+                // Validation with a small delta for decimal precision
+                if (Math.abs(expectedAvg - actualAvg) < 0.01) {
+                    System.out.println("[" + moduleName + "]: average is correct as per the given mid and end module feedback");
+                    System.out.println("   -> Calculated SSI: " + String.format("%.2f", expectedSSI));
+                } else {
+                    System.err.println("[" + moduleName + "]: FAILED! Expected " + expectedAvg + " but found " + actualAvg);
+                }
+
+            } catch (Exception e) {
+                // This catches headers or rows that don't match the numeric format
+            }
+        }
+    }
+
+    public void clickPrintButton() {
+        WebElement btn = driver.findElement(printButton);
+        if(btn.isDisplayed()) {
+            btn.click();
+            System.out.println("Success: Print button clicked.");
+        }
+    }
+}

@@ -17,6 +17,7 @@ public class AssignCctest extends Baseclass {
 		AssignCc assignPage = new AssignCc(driver, this);
 		assignPage.navigateToAssignCoordinator();
 		
+		Thread.sleep(10);
 		assignPage.fillAssignmentForm(
 	            "Certificate Courses", 
 	            "January 2026", 

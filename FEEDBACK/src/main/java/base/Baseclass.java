@@ -1,13 +1,13 @@
 package base;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-//import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -15,7 +15,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 //import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
+@org.testng.annotations.Listeners(util.Listeners.class)
 public class Baseclass {
 
 		public WebDriver driver;
@@ -39,6 +44,16 @@ public class Baseclass {
 	        dropdown.selectByVisibleText(visibleText);
 		}
 		
+		public String captureScreenshot(String testName) {
+		    String screenshotPath = System.getProperty("user.dir") + "/screenshots/" + testName + ".png";
+		    File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		    try {
+		        FileUtils.copyFile(srcFile, new File(screenshotPath));
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		    return screenshotPath;
+		}
 		
 		//Alert for assign cc
 		public void acceptAlert() {
@@ -49,9 +64,13 @@ public class Baseclass {
 	        alert.accept();
 		}
 		
-
+	
+		
+	
+		
 		@AfterMethod
-		public void closeBrowser() {
+		public void closeBrowser() throws InterruptedException {
+			Thread.sleep(4000);
 			if(driver != null) {
 				driver.quit();
 			}

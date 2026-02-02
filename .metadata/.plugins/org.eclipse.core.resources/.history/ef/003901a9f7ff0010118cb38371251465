@@ -1,0 +1,58 @@
+package pages;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+public class TheorySSIPage {
+    WebDriver driver;
+    WebDriverWait wait;
+
+    // Locators for the SSI Table
+    private By tableRows = By.xpath("//table[@id='ssiReportTable']//tbody/tr"); // Update ID if necessary
+    private By moduleNameCol = By.xpath("./td[2]");
+    private By midAvgCol = By.xpath("./td[3]");
+    private By endAvgCol = By.xpath("./td[4]");
+    private By displayedAvgCol = By.xpath("./td[5]");
+
+    public TheorySSIPage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    /**
+     * Extracts data from the web table into a List of Maps for verification.
+     */
+    public List<Map<String, String>> getTheoryTableData() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(tableRows));
+        List<WebElement> rows = driver.findElements(tableRows);
+        List<Map<String, String>> reportData = new ArrayList<>();
+
+        for (WebElement row : rows) {
+            Map<String, String> rowData = new HashMap<>();
+            rowData.put("moduleName", row.findElement(moduleNameCol).getText().trim());
+            rowData.put("midAvg", row.findElement(midAvgCol).getText().trim());
+            rowData.put("endAvg", row.findElement(endAvgCol).getText().trim());
+            rowData.put("displayedAvg", row.findElement(displayedAvgCol).getText().trim());
+            reportData.add(rowData);
+        }
+        return reportData;
+    }
+
+    /**
+     * Logic based on the Formula: (MidModule + EndModule) / 2.0
+     */
+    public double calculateExpectedAverage(String mid, String end) {
+        if (mid.equalsIgnoreCase("NA") || end.equalsIgnoreCase("NA")) {
+            return -1.0; // Flag for skipping
+        }
+        return (Double.parseDouble(mid) + Double.parseDouble(end)) / 2.0;
+    }
+}

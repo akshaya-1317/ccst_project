@@ -1,0 +1,30 @@
+//package tests;
+//
+//import org.testng.annotations.Test;
+//import base.Baseclass;
+//import pages.CenterHeadLogin;
+//import pages.CourseWiseSSI;
+//import pages.TheorySSI;
+//
+//public class TheorySSITest extends Baseclass {
+//
+//    @Test
+//    public void verifyTheorySSIValues() {
+//        // 1. Login
+//        CenterHeadLogin chl = new CenterHeadLogin(driver);
+//        chl.chlogin("401", "OFSCHead#12345");
+//
+//        // 2. Navigate to CourseWise SSI page
+//        TheorySSI ths = new TheorySSI(driver, this);
+//        ths.navigateToCourseWiseSSI();
+//        
+//        // 3. Select values to load the table
+//        ths.showSSIReport("Certificate Courses", "CCST Project Test Course 1", "January 2026", "Theory");
+//
+//        // 4. Perform Calculation Verification
+//        TheorySSI theory = new TheorySSI(driver, this);
+//        System.out.println("--- Starting Calculation Verification ---");
+//        theory.verifyTableCalculations();
+//        System.out.println("--- Verification Complete ---");
+//    }
+//}

@@ -1,0 +1,22 @@
+package tests;
+
+import org.testng.annotations.Test;
+
+import base.Baseclass;
+import pages.CenterHeadLogin;
+import pages.Logout;
+
+public class LogoutTest extends Baseclass {
+
+	@Test
+	public void verifyLogout() {
+		CenterHeadLogin chl = new CenterHeadLogin(driver);
+		chl.chlogin("401", "OFSCHead#12345");
+		
+		Logout lgt = new Logout(driver);
+		lgt.LogoutMethod();
+		System.out.println("User Logged out.");
+		
+		
+	}
+}
