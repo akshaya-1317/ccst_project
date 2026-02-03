@@ -1,0 +1,76 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import base.Baseclass;
+
+public class TheorySSI extends Baseclass {
+    WebDriver driver;
+    Baseclass base;
+
+    // Locators
+    By midModuleVal = By.xpath("//td[text()='Automation Testing Frameworks']/following-sibling::td[1]");
+    By endModuleVal = By.xpath("//td[text()='Automation Testing Frameworks']/following-sibling::td[2]");
+    By averageVal = By.xpath("//td[text()='Automation Testing Frameworks']/following-sibling::td[3]");
+    By totalAvgFeedback = By.xpath("//td[text()='Average Feedback Rating']/following-sibling::td[1]");
+
+    public TheorySSI(WebDriver driver, Baseclass baseInstance) {
+        this.driver = driver;
+        this.base = baseInstance;
+    }
+
+    public double getMidModuleScore() {
+        return Double.parseDouble(driver.findElement(midModuleVal).getText());
+    }
+
+    public double getEndModuleScore() {
+        return Double.parseDouble(driver.findElement(endModuleVal).getText());
+    }
+
+    public double getDisplayedAverage() {
+        return Double.parseDouble(driver.findElement(averageVal).getText());
+    }
+    
+    public double getTotalAverageFeedback() {
+        return Double.parseDouble(driver.findElement(totalAvgFeedback).getText());
+    }
+
+    }
+    
+
+//    public void verifyTableCalculations() {
+//        List<WebElement> rows = driver.findElements(tableRows);
+//        
+//        // Loop through rows that contain module data (skipping headers/footers if necessary)
+//        for (WebElement row : rows) {
+//            List<WebElement> columns = row.findElements(By.tagName("td"));
+//            
+//            // Assuming: Col 2=Name, Col 3=Mid, Col 4=End, Col 5=Actual Average
+//            if (columns.size() >= 5) {
+//                String moduleName = columns.get(1).getText();
+//                System.out.println(moduleName);
+//                String midStr = columns.get(2).getText();
+//                String endStr = columns.get(3).getText();
+//                String actualAvgStr = columns.get(4).getText();
+//
+//                if (!midStr.equals("NA") && !endStr.equals("NA")) {
+//                    double mid = Double.parseDouble(midStr);
+//                    double end = Double.parseDouble(endStr);
+//                    double actualAvg = Double.parseDouble(actualAvgStr);
+//
+//                    // Applying your formula: (Mid + End) / 2.0
+//                    double expectedAvg = (mid + end) / 2.0;
+//
+//                    if (Math.abs(expectedAvg - actualAvg) < 0.01) {
+//                        System.out.println("PASS: " + moduleName + " | Calc: " + expectedAvg + " | Web: " + actualAvg);
+//                    } else {
+//                        System.out.println("FAIL: " + moduleName + " | Expected: " + expectedAvg + " | Web: " + actualAvg);
+//                    }
+//                    
+//                    // Logic for SSI calculation as per your request
+//                    double theorySSI = expectedAvg * 60 / 100;
+//                    System.out.println("Calculated Theory SSI for " + moduleName + " is: " + theorySSI);
+//                }
+//            }
+//        }
+//    }

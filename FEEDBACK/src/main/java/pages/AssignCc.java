@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
+
 
 import base.Baseclass;
 
@@ -10,57 +10,65 @@ public class AssignCc extends Baseclass {
 	WebDriver driver;
 	Baseclass base;
 	
-	//go to assign cc
+	//NAVIGATE TO ASSIGN CC
 	By manageCC = By.xpath("//a[@class='drop'and @href='#']");
 	By assigncc = By.xpath("//a[@href='/feedbackSystem/login/faculty/call_assign_ccPage']");
 	
-	//xpath in assign cc
+	//XPATH FOR FIELDS IN ASSIGN CC 
 	By courseTypeDropdown = By.id("courseTypeId");
 	By batchDropdown = By.id("batchAsCourseType");
 	By coordinatorDropdown = By.id("CC_id");
 	By assignButton = By.xpath("//input[@value='Assign']");
 	
 
+	By checkbox1 = By.xpath("//input[@id='15' and @name='courseId']");
+	By checkbox2 = By.xpath("//input[@id='16' and @name='courseId']");
+
 	
-	By checkbox = By.xpath("//*[text()=\"CCST Project Test Course 2\"]");
 	
-	//constructor
+	//CONSTRUCTOR
 	public AssignCc(WebDriver driver, Baseclass baseInstance ) {
         this.driver = driver;
         this.base = baseInstance;
     }
 	
-	//navigate to assign cc
+	//NAVIGATE TO ASSIGN CC
 	public void navigateToAssignCoordinator() {
         driver.findElement(manageCC).click();
         driver.findElement(assigncc).click();
     }
 	
-	//submit assign button
+	//ASSIGN BUTTON
 	 public void submitAssignment() {
      	driver.findElement(assignButton).click();
          base.acceptAlert();
      }
 	
 	 
-	 //dropdowns handling 
-	public void fillAssignmentForm(String courseType, String batch, String coordinator, String courseName) {
-       
+	 //INSTANCE METHOD
+	public void fillAssignmentForm(String courseType, String batch, String coordinator, String courseName) {   //, String courseName2
+      
         base.selectFromDropdown(courseTypeDropdown, courseType);
         base.selectFromDropdown(batchDropdown, batch);
         base.selectFromDropdown(coordinatorDropdown, coordinator);
 	
+	//checkbox click
+        driver.findElement(checkbox1).click();
+      
+
+        }
 	
-        driver.findElement(checkbox).click();
-        
-       
-        
+	public void fillAssignmentForm1(String courseType, String batch, String coordinator, String courseName1) {   //, String courseName2
+	      
+        base.selectFromDropdown(courseTypeDropdown, courseType);
+        base.selectFromDropdown(batchDropdown, batch);
+        base.selectFromDropdown(coordinatorDropdown, coordinator);
+	
+	//checkbox click
+     
+        driver.findElement(checkbox2).click();
+
+        }
 	
 	
-//	public void selectMultipleCourses(String[] courseNames) {
-//	    for (String name : courseNames) {
-//	        selectCourseByName(name);
-//	    }
-	
-}
 }

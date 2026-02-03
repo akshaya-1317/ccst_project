@@ -9,6 +9,8 @@ public class CenterwiseFeedbackDetails extends Baseclass{
 	WebDriver driver;
 	Baseclass base;
 	
+	
+	//XPATH IN CENTERWISE FEEDBACK DETAILS
 	//By manageCC = By.xpath("//a[@class='drop'and @href='#']");
 	By centerwiseFD = By.xpath("//a[@href='/feedbackSystem/login/faculty/viewCenterCoursePlan']");
 	
@@ -16,17 +18,21 @@ public class CenterwiseFeedbackDetails extends Baseclass{
     By course = By.id("courseId");
     By batch = By.id("batchId");
     
+    
+    //CONSTRUCTOR
     public CenterwiseFeedbackDetails(WebDriver driver, Baseclass baseInstance) {
         this.driver = driver;
         this.base = baseInstance;
     }
     
+    //NAVIGATE TO CENTERWISE FEEDBACK DETAILS
     public void navigateToCenterwiseFeedback() {
       //  driver.findElement(manageCC).click();
         driver.findElement(centerwiseFD).click();
 
     }
     
+    //INSTANCE METHOD
     public void centerwiseFeedbackDetails(String type, String courseName, String batchName) {
         base.selectFromDropdown(courseType, type);
         base.selectFromDropdown(course, courseName);

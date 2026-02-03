@@ -3,11 +3,10 @@ package base;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -20,11 +19,16 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+
+
 @org.testng.annotations.Listeners(util.Listeners.class)
+
+
 public class Baseclass {
 
 		public WebDriver driver;
 		
+		//Open browser and link
 		@BeforeMethod
 		public void openBrowser() {
 			
@@ -39,11 +43,13 @@ public class Baseclass {
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		}
 		
+		//Common logic for all dropdowns
 		public void selectFromDropdown(By locator, String visibleText) {
 	        Select dropdown = new Select(driver.findElement(locator));
 	        dropdown.selectByVisibleText(visibleText);
 		}
 		
+		//Logic for screenshot
 		public String captureScreenshot(String testName) {
 		    String screenshotPath = System.getProperty("user.dir") + "/screenshots/" + testName + ".png";
 		    File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -55,7 +61,8 @@ public class Baseclass {
 		    return screenshotPath;
 		}
 		
-		//Alert for assign cc
+		
+		//Handles alert for assign course coordinator
 		public void acceptAlert() {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 	        wait.until(ExpectedConditions.alertIsPresent());
@@ -67,7 +74,7 @@ public class Baseclass {
 	
 		
 	
-		
+		//quit browser
 		@AfterMethod
 		public void closeBrowser() throws InterruptedException {
 			Thread.sleep(4000);

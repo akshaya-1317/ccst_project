@@ -9,6 +9,8 @@ public class CourseWiseSSI extends Baseclass {
 	WebDriver driver;
     Baseclass base;
     
+    
+    //XPATH IN COURSEWISE SSI
 	By coursewiseSSI = By.xpath("//a[@href='/feedbackSystem/login/manager/viewCenterCourseSSI']");
 	
 	By courseType = By.id("courseTypeId");
@@ -18,15 +20,21 @@ public class CourseWiseSSI extends Baseclass {
 	
 	By printbutton = By.id("btnPrintId");
 	
+	
+	//CONSTRUCTOR
 	public CourseWiseSSI(WebDriver driver, Baseclass baseInstance) {
         this.driver = driver;
         this.base = baseInstance;
     }
 	
+	
+	//NAVIGATE TO FUNCTION
 	public void navigateToCourseWiseSSI() {
         driver.findElement(coursewiseSSI).click();
     }
 	
+	
+	//INSTANCE METHOD
 	public void showSSIReport(String ctype, String cname, String cbatch, String report) {
 		base.selectFromDropdown(courseType, ctype);
 		base.selectFromDropdown(course, cname);

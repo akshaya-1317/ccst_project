@@ -7,28 +7,31 @@ import org.openqa.selenium.WebElement;
 public class AddCourseCoordinator {
 	WebDriver driver;
 	
-	
+	//ADD CC FUNCTIONALITY - XPATH FOR MANAGE CC, ADD CC
 	  // By manageCC = By.xpath("//b[contains(text(), 'Manage Course Coordinator')]");
 	  By manageCC = By.xpath("//a[@class='drop'and @href='#']");
 	  By addCC = By.xpath("//a[@href='/feedbackSystem/login/faculty/addCourseCoordinator']");
 
-	  
+	  //LOCATORS FOR FIELDS IN ADD CC
 	  By ccname = By.id("ccName");
 	  By ccemail = By.id("emailId");
 	  By ccphone = By.id("phoneNo");
 	  By ccmobile = By.id("mobileNo");
 	  By addButton = By.xpath("//input[@value='Add']");
 	  
+	  //CONSTRUCTOR
 	  public AddCourseCoordinator(WebDriver driver) {
 	        this.driver = driver;
 	    }
 	  
+	  
+	  //NAVIGATION TO FUNCTION
 	  public void navigateToAddCoordinator() {
 		  driver.findElement(manageCC).click();
 		  driver.findElement(addCC).click();
 	  }
 	  
-	  
+	  //INSTANCE METHOD
 	  public void fillCoordinatorDetails(String name, String mail, String phone, String mobile) {
 	        driver.findElement(ccname).sendKeys(name);
 	        driver.findElement(ccemail).sendKeys(mail);

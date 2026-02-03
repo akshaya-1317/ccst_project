@@ -8,11 +8,15 @@ import pages.Logout;
 
 public class LogoutTest extends Baseclass {
 
+	//TEST : VERIFY LOGOUT
+	//MADE BY : AKSHAYA KULKARNI
 	@Test
 	public void verifyLogout() {
+		//LOGIN 
 		CenterHeadLogin chl = new CenterHeadLogin(driver);
 		chl.chlogin("401", "OFSCHead#12345");
 		
+		//OBJECT OF LOGOUT JAVA
 		Logout lgt = new Logout(driver);
 		lgt.LogoutMethod();
 		System.out.println("User Logged out.");

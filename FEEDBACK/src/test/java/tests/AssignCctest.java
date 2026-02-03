@@ -9,21 +9,38 @@ import pages.CenterHeadLogin;
 
 public class AssignCctest extends Baseclass {
 	
+	//TEST : VERIFY ASSIGN COORDINATOR
+	//MADE BY : AKSHAYA KULKARNI
 	@Test
 	public void verifyAssignCoordinator() throws InterruptedException {
+		//LOGIN
 		CenterHeadLogin chl =  new CenterHeadLogin(driver);
 		chl.chlogin("401", "OFSCHead#12345");
 		
+		//NAVIGATE TO ASSIGN PAGE
 		AssignCc assignPage = new AssignCc(driver, this);
 		assignPage.navigateToAssignCoordinator();
 		
+		//PASSING PARAMETER
 		Thread.sleep(10);
 		assignPage.fillAssignmentForm(
 	            "Certificate Courses", 
 	            "January 2026", 
-	            "Mrunali Meshram", 
-	            "CCST Project Test Course 2"
+	            "Akshaya Vaidya2", 
+	            "CCST Project Test Course 3"
+	           
 	        );
+		System.out.println("Course 3 assigned to Akshaya Vaidya");
+		
+		assignPage.fillAssignmentForm1(
+	            "Certificate Courses", 
+	            "January 2026", 
+	            "Akshaya Vaidya2", 
+	            "CCST Project Test Course 4" 
+	        );
+		System.out.println("Course 4 assigned to Akshaya Vaidya");
+		
+	//	System.out.println("Assigned both courses for Akshaya Vaidya2");
 		
 		Thread.sleep(10);
 		assignPage.submitAssignment();

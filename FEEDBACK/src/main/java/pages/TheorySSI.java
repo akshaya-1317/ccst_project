@@ -8,7 +8,7 @@ public class TheorySSI extends Baseclass {
     WebDriver driver;
     Baseclass base;
 
-    // Locators
+    // LOCATORS TO THEORYSSI
     By midModuleVal = By.xpath("//td[text()='Automation Testing Frameworks']/following-sibling::td[1]");
     By endModuleVal = By.xpath("//td[text()='Automation Testing Frameworks']/following-sibling::td[2]");
     By averageVal = By.xpath("//td[text()='Automation Testing Frameworks']/following-sibling::td[3]");

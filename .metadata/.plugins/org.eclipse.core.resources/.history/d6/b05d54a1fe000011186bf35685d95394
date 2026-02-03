@@ -1,0 +1,60 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+
+import base.Baseclass;
+
+public class AssignCc extends Baseclass {
+	WebDriver driver;
+	Baseclass base;
+	
+	//NAVIGATE TO ASSIGN CC
+	By manageCC = By.xpath("//a[@class='drop'and @href='#']");
+	By assigncc = By.xpath("//a[@href='/feedbackSystem/login/faculty/call_assign_ccPage']");
+	
+	//XPATH FOR FIELDS IN ASSIGN CC 
+	By courseTypeDropdown = By.id("courseTypeId");
+	By batchDropdown = By.id("batchAsCourseType");
+	By coordinatorDropdown = By.id("CC_id");
+	By assignButton = By.xpath("//input[@value='Assign']");
+	
+
+	By checkbox1 = By.xpath("//input[@id='15' and @name='courseId']");
+	By checkbox2 = By.xpath("//input[@id='16' and @name='courseId']");
+
+	
+	
+	//CONSTRUCTOR
+	public AssignCc(WebDriver driver, Baseclass baseInstance ) {
+        this.driver = driver;
+        this.base = baseInstance;
+    }
+	
+	//NAVIGATE TO ASSIGN CC
+	public void navigateToAssignCoordinator() {
+        driver.findElement(manageCC).click();
+        driver.findElement(assigncc).click();
+    }
+	
+	//ASSIGN BUTTON
+	 public void submitAssignment() {
+     	driver.findElement(assignButton).click();
+         base.acceptAlert();
+     }
+	
+	 
+	 //INSTANCE METHOD
+	public void fillAssignmentForm(String courseType, String batch, String coordinator, String courseName) {   //, String courseName2
+      
+        base.selectFromDropdown(courseTypeDropdown, courseType);
+        base.selectFromDropdown(batchDropdown, batch);
+        base.selectFromDropdown(coordinatorDropdown, coordinator);
+	
+	//checkbox click
+        driver.findElement(checkbox1).click();
+        driver.findElement(checkbox2).click();
+
+        }
+}

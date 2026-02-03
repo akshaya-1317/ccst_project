@@ -12,26 +12,25 @@ import util.csvreader;
 
 public class LoginTestCases extends Baseclass {
 	
+	//DATA PROVIDER 
 	@DataProvider(name = "loginData")
     public Object[][] getData() {
 
+		//FILEPATH OF CSV FILE
 		String filePath = System.getProperty("user.dir") + "/src/main/resources/testdata/LoginData.csv";
         return csvreader.getTestData(filePath);
     }
 
+			//TEST : VERIFY LOGIN
+			//MADE BY : AKSHAYA KULKARNI
+	
     @Test(priority=1, dataProvider = "loginData")
     public void verifyLogin(String username, String password) {
+    	//LOGIN
         CenterHeadLogin chl = new CenterHeadLogin(driver);
         
-        // Using parameters from CSV
+        // USE PARAMETERS FROM CSV
         chl.chlogin(username, password);
-
-       
-        
-
-      
-        
-     
         System.out.println("Login attempt finished for user: " + username);
     }
 	

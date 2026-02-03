@@ -10,17 +10,20 @@ package util;
 
 	public class csvreader {
 
+		//STATIC METHOD THAT TAKES FILE PATH
 	    public static Object[][] getTestData(String filePath) {
 	        String line = "";
 	        String csvSplitBy = ",";
+	        //LIST TO HOLD ROWS
 	        List<Object[]> data = new ArrayList<>();
 
+	        //TRY WITH RESOURCES
 	        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 	            // Skip header line
 	            br.readLine(); 
 
 	            while ((line = br.readLine()) != null) {
-	                // Split by comma
+	                // SPLITS LINE INTO ARRAY
 	                String[] loginCredentials = line.split(csvSplitBy);
 	                data.add(loginCredentials);
 	            }
@@ -28,6 +31,7 @@ package util;
 	            e.printStackTrace();
 	        }
 
+	        //CONVERTS LIST INTO ARRAY
 	        return data.toArray(new Object[0][]);
 	    }
 	}

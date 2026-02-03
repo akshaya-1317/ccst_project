@@ -8,12 +8,16 @@ import org.openqa.selenium.WebDriver;
 public class Logout {
 	
 	WebDriver driver;
+	
+	//XPATH
 	By logoutButton = By.id("logout");
 	
+	//CONSTRUCTOR
 	 public Logout(WebDriver driver) {
 	        this.driver = driver;
 	    }
 	 
+	 //INSTANCE METHOD
 	  public void LogoutMethod() {
 		  driver.findElement(logoutButton).click();
 		  
